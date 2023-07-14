@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 export default function AddNote() {
-
+    const navigate = useNavigate();
     const [title, setTitle] = useState();
     const [description, setDescription] = useState();
     const [tag, setTag] = useState();
@@ -24,6 +25,8 @@ export default function AddNote() {
                 setTitle("");
                 setDescription("");
                 setTag("");
+                navigate("/");
+
             } else {
                 setMessage("Either your title or description is too short");
             }

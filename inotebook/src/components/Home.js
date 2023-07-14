@@ -1,12 +1,11 @@
 import React from "react"
-import Notes from "./Notes"
-import UpdateNote from "./UpdateNote"
+import AllNotes from "./AllNotes"
 
 export default function Home() {
 
     return (
         <div>
-            <Notes />
+            <AllNotes />
         </div>
     )
 }

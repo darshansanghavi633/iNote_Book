@@ -1,5 +1,5 @@
 import AddNote from './AddNote';
-import UpdateNote from './UpdateNote';
+import UpdateNote from './AllNotes';
 
 export default function Notes() {
     return (

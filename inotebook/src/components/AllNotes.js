@@ -20,7 +20,7 @@ export default function UpdateNote() {
 
     return (
         <div className='row my-3'>
-            <h2> Your Note</h2>
+            <h2 className='mb-3'> Your Note</h2>
             {data.map((item) => (
                 <NoteItem key={item._id} note={item} />
             ))}
