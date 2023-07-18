@@ -10,14 +10,26 @@ export default function NoteItem(props) {
     const [show, setShow] = useState(false);
     const [edit, setEdit] = useState(false);
     const [deleted, setDeleted] = useState(false);
+    const [updated, setUpdated] = useState(false);
     const handleEdit = () => setEdit(true);
     const handleClose = () => setShow(false);
     const handleClose1 = () => setEdit(false);
     const handleShow = () => setShow(true);
-    const handleUpdate = () => {
-        console.log('update');
-        console.log({ title, description, tag })
-        handleClose1();
+    const handleUpdate = async () => {
+        let result = await fetch(`http://localhost:5000/api/notes/updatenote/${props.note._id}`, {
+            method: "put",
+            body: JSON.stringify({ title, description, tag }),
+            headers: {
+                "Content-Type": "application/json",
+                "auth-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjQ5Yzc4ZWY2ZWNjMWI1MjdmODgwZGQ1In0sImlhdCI6MTY4ODAwNzY2MX0.KGFxM83nUOWS07seojRhExJkA2HHYnZEzQquF1nznrs"
+
+            },
+        });
+        result = await result.json();
+        if (result) {
+            setUpdated(true);
+            handleClose1();
+        }
     }
     const handleDelete = async () => {
         let response = await fetch(`http://localhost:5000/api/notes/deletenote/${props.note._id}`, {
@@ -42,6 +54,7 @@ export default function NoteItem(props) {
                     <button className="fa-solid fa-trash my-2" style={{ color: "red", backgroundColor: "white", border: "none" }} onClick={handleShow}></button>
                     <i className="fa-solid fa-pen-to-square mx-2 my-2" style={{ color: "purple" }} onClick={handleEdit}></i>
                     {deleted && <div style={{ color: "red" }}>This note is deleted</div>}
+                    {updated && <div style={{ color: "green" }}>This note is updated</div>}
                 </div>
             </div>
             {/* Added modal to comfirm from user that he is sure he want to delete the note */}

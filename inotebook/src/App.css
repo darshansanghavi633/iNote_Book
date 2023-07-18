@@ -6,3 +6,6 @@
   -moz-box-shadow: 12px 13px 35px -5px rgba(51, 46, 46, 0.94);
   box-shadow: 12px 13px 35px -5px rgba(51, 46, 46, 0.94);
 }
+.modal-content {
+  padding: 10px;
+}

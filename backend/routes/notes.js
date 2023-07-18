@@ -83,7 +83,7 @@ router.delete('/deletenote/:id', fetchuser, async (req, res) => {
             return res.status(404).send("Not found");
         }
         if (note.user.toString() !== req.user.id) {
-            return res.status(401).send("Not Notes Exists which such title");
+            return res.status(401).send("No Notes Exists which such title");
         }
         //Allow user to delete notes if the user owns this note
         note = await Note.findByIdAndDelete(req.params.id)
@@ -93,6 +93,24 @@ router.delete('/deletenote/:id', fetchuser, async (req, res) => {
         res.status(500).send("Internal Server Error");
     }
 });
+
+//!Route 5
+//Get details of the notes to be updated using get "/api/notes/getdetails" Login required
+router.get('/getdetails/:id', fetchuser, async (req, res) => {
+    try {
+        let note = await Note.findOne({ _id: req.params.id });
+        if (!note) {
+            return res.status(404).send("Not found");
+        }
+        if (note.user.toString() !== req.user.id) {
+            return res.status(401).send("No Notes Exists which such title");
+        }
+        res.json({ note });
+    } catch (error) {
+        console.log(error.message);
+        res.status(500).send("Internal Server Error");
+    }
+})
 
 
 module.exports = router;
