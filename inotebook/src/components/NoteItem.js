@@ -4,8 +4,8 @@ import Modal from 'react-bootstrap/Modal';
 
 
 export default function NoteItem(props) {
-    const [title, setTitle] = useState();
-    const [description, setDescription] = useState();
+    const [title, setTitle] = useState('');
+    const [description, setDescription] = useState('');
     const [tag, setTag] = useState();
     const [show, setShow] = useState(false);
     const [edit, setEdit] = useState(false);
@@ -29,6 +29,7 @@ export default function NoteItem(props) {
         if (result) {
             setUpdated(true);
             handleClose1();
+            props.showAlert("Updated Notes Successfully", "success");
         }
     }
     const handleDelete = async () => {
@@ -42,6 +43,7 @@ export default function NoteItem(props) {
         if (response) {
             setDeleted(true);
             handleClose();
+            props.showAlert("Deleted Notes Successfully", "success");
         }
     }
     return (
@@ -94,7 +96,7 @@ export default function NoteItem(props) {
                     <Button variant="dark" onClick={handleClose1}>
                         No
                     </Button>
-                    <Button variant="danger" onClick={handleUpdate}>
+                    <Button disabled={description.length < 5} variant="danger" onClick={handleUpdate}>
                         Yes
                     </Button>
                 </Modal.Footer>

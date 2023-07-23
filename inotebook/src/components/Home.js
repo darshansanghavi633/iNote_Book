@@ -1,11 +1,11 @@
 import React from "react"
 import AllNotes from "./AllNotes"
 
-export default function Home() {
+export default function Home(props) {
 
     return (
         <div>
-            <AllNotes />
+            <AllNotes showAlert={props.showAlert} />
         </div>
     )
 }

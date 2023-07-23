@@ -1,12 +1,7 @@
-import React, { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 
 export default function Navbar() {
     let location = useLocation();
-    const [search, setSearch] = useState();
-    useEffect(() => {
-        console.log(search)
-    }, [search]);
 
     return (
         <div>
@@ -28,9 +23,9 @@ export default function Navbar() {
                                 <Link className={`nav-link ${location.pathname === "/about" ? "active" : ""}`} to="/about">About</Link>
                             </li>
                         </ul>
-                        <form className="d-flex" role="search">
-                            <input className="form-control me-2" onChange={(e) => { setSearch(e.target.value) }} type="search" placeholder="Search" aria-label="Search" />
-                            <button className="btn btn-outline-success" type="submit">Search</button>
+                        <form className="d-flex" >
+                            <Link to='/login' className='btn btn-dark mx-1' >Login</Link>
+                            <Link to='/signup' className='btn btn-dark mx-1' >Signup</Link>
                         </form>
                     </div>
                 </div>

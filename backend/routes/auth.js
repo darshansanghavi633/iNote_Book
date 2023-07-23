@@ -28,6 +28,7 @@ router.post(
     //check whether the user with this email exists already
     try {
       let user = await User.findOne({ email: req.body.email });
+      let success = false;
       //if user exists notify the user
       if (user) {
         return res
@@ -49,8 +50,9 @@ router.post(
         },
       };
       const authToken = jwt.sign(data, JWT_SECRET);
+      success = true;
       //return authToken
-      res.json({ authToken });
+      res.json({ authToken, success });
       //in case server crashes then internal server error message will be returned
     } catch (error) {
       console.log(error.message);
@@ -89,6 +91,7 @@ router.post(
         return res
           .status(400)
           .json({ error: "Please try to login with correct credentials!" });
+        let success = false;
       }
       const data = {
         user: {
@@ -96,7 +99,8 @@ router.post(
         },
       };
       const authToken = jwt.sign(data, JWT_SECRET);
-      res.json({ authToken });
+      success = true;
+      res.json({ authToken, success });
     } catch (error) {
       console.error(error.message);
       res.status(500).send("Internal Server Error");

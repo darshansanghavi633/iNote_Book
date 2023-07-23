@@ -9,3 +9,7 @@
 .modal-content {
   padding: 10px;
 }
+.input-group-text {
+  background-color: black;
+  color: white;
+}

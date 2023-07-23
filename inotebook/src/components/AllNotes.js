@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import NoteItem from './NoteItem';
 
-export default function UpdateNote() {
+export default function UpdateNote(props) {
     const [data, setData] = useState([]);
     const handleFetchAllNotes = async () => {
         let response = await fetch('http://localhost:5000/api/notes/fetchallnotes', {
@@ -22,7 +22,7 @@ export default function UpdateNote() {
         <div className='row my-3'>
             <h2 className='mb-3'> Your Note</h2>
             {data.map((item) => (
-                <NoteItem key={item._id} note={item} />
+                <NoteItem key={item._id} note={item} showAlert={props.showAlert} />
             ))}
         </div>
     )

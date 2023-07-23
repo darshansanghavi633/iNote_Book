@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-export default function AddNote() {
+export default function AddNote(props) {
     const navigate = useNavigate();
-    const [title, setTitle] = useState();
-    const [description, setDescription] = useState();
-    const [tag, setTag] = useState();
+    const [title, setTitle] = useState('');
+    const [description, setDescription] = useState('');
+    const [tag, setTag] = useState('');
     const [message, setMessage] = useState();
     const handleNote = async () => {
         try {
@@ -26,6 +26,7 @@ export default function AddNote() {
                 setDescription("");
                 setTag("");
                 navigate("/");
+                props.showAlert("Notes Added Successfully", "success");
 
             } else {
                 setMessage("Either your title or description is too short");
@@ -51,7 +52,7 @@ export default function AddNote() {
             </div>
             {message === "Notes Added Successfully" ? <div style={{ color: "green" }}>{message}</div> : <div style={{ color: "red" }}>{message}</div>}
             <div className='text-center'>
-                <button type="button" onClick={handleNote} className="btn btn-dark">Add Note</button>
+                <button disabled={title.length < 3 || description.length < 5} type="button" onClick={handleNote} className="btn btn-dark">Add Note</button>
             </div>
         </div>
     )
