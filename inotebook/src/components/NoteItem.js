@@ -21,7 +21,7 @@ export default function NoteItem(props) {
             body: JSON.stringify({ title, description, tag }),
             headers: {
                 "Content-Type": "application/json",
-                "auth-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjQ5Yzc4ZWY2ZWNjMWI1MjdmODgwZGQ1In0sImlhdCI6MTY4ODAwNzY2MX0.KGFxM83nUOWS07seojRhExJkA2HHYnZEzQquF1nznrs"
+                "auth-token": localStorage.getItem('authToken')
 
             },
         });
@@ -37,7 +37,7 @@ export default function NoteItem(props) {
             method: 'DELETE',
             'headers': {
                 "Content-Type": "application/json",
-                "auth-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjQ5Yzc4ZWY2ZWNjMWI1MjdmODgwZGQ1In0sImlhdCI6MTY4ODAwNzY2MX0.KGFxM83nUOWS07seojRhExJkA2HHYnZEzQquF1nznrs"
+                "auth-token": localStorage.getItem('authToken')
             }
         });
         if (response) {

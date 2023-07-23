@@ -9,12 +9,11 @@ export default function AddNote(props) {
     const [message, setMessage] = useState();
     const handleNote = async () => {
         try {
-            console.log({ title, description, tag });
             let response = await fetch('http://localhost:5000/api/notes/addnote', {
                 method: 'POST',
                 headers: {
                     "Content-Type": "application/json",
-                    "auth-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjQ5Yzc4ZWY2ZWNjMWI1MjdmODgwZGQ1In0sImlhdCI6MTY4ODAwNzY2MX0.KGFxM83nUOWS07seojRhExJkA2HHYnZEzQquF1nznrs"
+                    "auth-token": localStorage.getItem('authToken')
                 },
                 body: JSON.stringify({ title, description, tag }),
             })

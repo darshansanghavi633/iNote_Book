@@ -1,8 +1,13 @@
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 
-export default function Navbar() {
+export default function Navbar(props) {
     let location = useLocation();
-
+    const navigate = useNavigate();
+    const handleLogout = () => {
+        localStorage.removeItem('authToken');
+        props.showAlert("Logout Successfully", "success");
+        navigate('/login');
+    }
     return (
         <div>
             <nav className="navbar navbar-expand-lg bg-dark navbar-dark ">
@@ -23,10 +28,10 @@ export default function Navbar() {
                                 <Link className={`nav-link ${location.pathname === "/about" ? "active" : ""}`} to="/about">About</Link>
                             </li>
                         </ul>
-                        <form className="d-flex" >
+                        {!localStorage.getItem('authToken') ? <form className="d-flex" >
                             <Link to='/login' className='btn btn-dark mx-1' >Login</Link>
                             <Link to='/signup' className='btn btn-dark mx-1' >Signup</Link>
-                        </form>
+                        </form> : <button className='btn btn-dark mx-1' onClick={handleLogout}>Logout</button>}
                     </div>
                 </div>
             </nav>

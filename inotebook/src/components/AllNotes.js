@@ -1,18 +1,24 @@
 import React, { useEffect, useState } from 'react';
 import NoteItem from './NoteItem';
+import { useNavigate } from 'react-router-dom';
 
 export default function UpdateNote(props) {
     const [data, setData] = useState([]);
+    const navigate = useNavigate();
     const handleFetchAllNotes = async () => {
         let response = await fetch('http://localhost:5000/api/notes/fetchallnotes', {
             method: 'GET',
             headers: {
                 "Content-Type": "application/json",
-                "auth-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjQ5Yzc4ZWY2ZWNjMWI1MjdmODgwZGQ1In0sImlhdCI6MTY4ODAwNzY2MX0.KGFxM83nUOWS07seojRhExJkA2HHYnZEzQquF1nznrs"
+                "auth-token": localStorage.getItem('authToken')
             }
         })
         response = await response.json();
         setData(response);
+        if (!response) {
+            navigate('/add');
+            props.showAlert("No notes to display", "success");
+        }
     }
     useEffect(() => {
         handleFetchAllNotes();
